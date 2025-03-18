@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
-              'Animation_1740222879103.json',
+              'assets/animation/Animation_1740222879103.json',
               width: screenWidth * 0.5,
               height: screenHeight * 0.3,
               fit: BoxFit.contain,

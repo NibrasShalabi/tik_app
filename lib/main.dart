@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tik_app/routes.dart';
-import 'package:tik_app/view/favorites_view/favorites_controller.dart';
-import 'package:tik_app/view/home_view/home_controller.dart';
+import 'bindings/initialize_binding.dart';
 import 'core/constant/responsive.dart';
 import 'core/constant/routes.dart';
+import 'core/services/service.dart';
 
-void main() {
-  Get.put(HomeController());
-  Get.put(FavoritesController());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initialServices();
   runApp(const MyApp());
 }
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'Tik App',
           debugShowCheckedModeBanner: false,
+          initialBinding: InitialBindings(),
           getPages: AppPages.pages,
           initialRoute: AppRoutes.splash,
         );
