@@ -13,7 +13,7 @@ import 'package:tik_app/view/widgets/custom_search_bar.dart';
 class HomeScreen extends StatelessWidget {
   final NavigationController navController = Get.put(NavigationController());
 
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       appBar: const CustomAppbar(),
       body: Obx(() => navController.currentScreen),
-      bottomNavigationBar:
-          CustomBottomNavigationBar(navController: navController),
+      bottomNavigationBar: CustomBottomNavigationBar(navController: navController),
     );
   }
 }
@@ -48,8 +47,7 @@ class HomeContentScreen extends StatelessWidget {
                 onToggleFavorite: (product) =>
                     favoritesController.toggleFavorite(product),
                 onDelete: (product) {
-                  if (product.id != null)
-                    homeController.deleteProduct(product.id!);
+                  if (product.id != null) homeController.deleteProduct(product.id!);
                 },
                 onAddToCart: (product) => cartController.addToCart(product),
               ),

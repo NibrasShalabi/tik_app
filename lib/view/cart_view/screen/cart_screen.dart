@@ -22,10 +22,7 @@ class CartScreen extends StatelessWidget {
           onPressed: () {},
           backgroundColor: AppColors.background,
           icon: const Icon(Icons.shopping_cart, color: AppColors.text),
-          label: Text(
-            '\$${cartController.totalPrice.toStringAsFixed(2)}',
-            style: AppTextStyles.price,
-          ),
+          label: Text('\$${cartController.totalPrice.toStringAsFixed(2)}', style: AppTextStyles.price,),
         ),
       ),
       body: CustomProductList(

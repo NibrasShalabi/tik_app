@@ -12,7 +12,7 @@ class AddProdutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.background,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,15 +26,6 @@ class AddProdutScreen extends StatelessWidget {
                   controller: controller.titleController,
                   label: "Product Title".tr,
                   validator: (value) => value!.isEmpty ? 'Title is required'.tr : null,
-                ),
-                _buildTextField(
-                  controller: controller.imageController,
-                  label: "Image URL".tr,
-                  validator: (value) {
-                    if (value!.isEmpty) return 'Image URL is required'.tr;
-                    if (!value.startsWith('http')) return 'Invalid URL format'.tr;
-                    return null;
-                  },
                 ),
                 _buildTextField(
                   controller: controller.priceController,

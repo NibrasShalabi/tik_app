@@ -1,21 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tik_app/core/constant/colors.dart';
 import 'package:tik_app/data/models/product_model.dart';
 import 'package:tik_app/view/home_view/controller/home_controller.dart';
-
-import '../../../core/constant/colors.dart';
-import '../../../core/services/service.dart';
-
 class AddProductController extends GetxController {
   final HomeController homeController = Get.find<HomeController>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final LocalStorageService storage = Get.find();
 
   RxBool isLoading = false.obs;
 
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController imageController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController brandController = TextEditingController();
@@ -29,13 +24,11 @@ class AddProductController extends GetxController {
         return;
       }
 
-
       isLoading.value = true;
 
       final newProduct = Products(
         title: titleController.text.trim(),
-        image: imageController.text.trim(),
-        price: double.tryParse(priceController.text.trim()) ?? 0,
+        price: double.parse(priceController.text.trim()),
         description: descriptionController.text.trim(),
         brand: brandController.text.trim(),
         model: modelController.text.trim(),
@@ -51,7 +44,6 @@ class AddProductController extends GetxController {
       showSuccessSnackbar('Product added successfully'.tr);
       clearForm();
       Get.back();
-
     } on SocketException catch (_) {
       showErrorSnackbar('Server connection failed'.tr, isServerError: true);
     } on FormatException catch (_) {
@@ -65,7 +57,6 @@ class AddProductController extends GetxController {
 
   void clearForm() {
     titleController.clear();
-    imageController.clear();
     priceController.clear();
     descriptionController.clear();
     brandController.clear();

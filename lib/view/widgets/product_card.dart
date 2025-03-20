@@ -7,7 +7,7 @@ import 'package:tik_app/data/models/product_model.dart';
 import 'package:tik_app/view/cart_view/controller/cart_controller.dart';
 import 'package:tik_app/view/favorites_view/controller/favorites_controller.dart';
 import 'package:tik_app/view/home_view/controller/home_controller.dart';
-import 'edit_product_dialog.dart';
+import 'edit_product_dialog/edit_product_dialog.dart';
 
 class ProductCard extends StatelessWidget {
   final Products product;

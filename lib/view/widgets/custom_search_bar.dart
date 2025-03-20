@@ -14,6 +14,7 @@ class CustomSearchBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(AppSize.padding),
       child: TextField(
+        style: TextStyle(color: AppColors.text),
         decoration: InputDecoration(
           hintText: 'Search products...',
           hintStyle: AppTextStyles.price,

@@ -23,19 +23,19 @@ class Crud {
     }
   }
 
-  Future<Products> addProduct(Products productData) async {
+  Future<Products?> addProduct(Products product) async {
     try {
       final response = await dio.post(
-        AppLinks.products,
-        data: productData.toJson(),
+        'https://your-api.com/products',
+        data: product.toJson(),
       );
-      if (response.statusCode == 200 || response.statusCode == 201) {
+
+      if (response.statusCode == 201) {
         return Products.fromJson(response.data);
-      } else {
-        throw Exception('Error In addProduct: ${response.statusCode}');
       }
+      return null;
     } catch (e) {
-      print('Error To addProduct: $e');
+      print("Error in addProduct: $e");
       throw Exception('Failed to add product');
     }
   }

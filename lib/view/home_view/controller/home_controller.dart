@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:tik_app/core/classes/crud_class.dart';
 import 'package:tik_app/data/models/product_model.dart';
-import '../../../core/classes/crud_class.dart';
 
 class HomeController extends GetxController {
   final RxList<Products> products = <Products>[].obs;
@@ -14,7 +13,6 @@ class HomeController extends GetxController {
     super.onInit();
     fetchProducts();
   }
-
   Future<void> fetchProducts() async {
     try {
       var productList = await repository.getProducts();
@@ -26,8 +24,6 @@ class HomeController extends GetxController {
       print("Error fetching products: $e");
     }
   }
-
-
   void filterProducts(String query) {
     searchQuery.value = query;
     if (query.isEmpty) {
@@ -38,32 +34,45 @@ class HomeController extends GetxController {
       );
     }
   }
-
   Future<void> addProduct(Products product) async {
     try {
       var newProduct = await repository.addProduct(product);
       if (newProduct != null) {
-        products.add(newProduct);
+        products.insert(0, newProduct);
         filterProducts(searchQuery.value);
+        Get.snackbar('Success', 'Product added successfully');
+        update();
+      } else {
+        Get.snackbar('Error', 'Failed to add product: Server returned null');
       }
     } catch (e) {
       print("Error adding product: $e");
+      Get.snackbar(
+        'Error',
+        'Failed to add product: ${e.toString()}',
+        duration: Duration(seconds: 5),
+      );
     }
   }
+
   Future<bool> updateProduct(int id, Products updatedProduct) async {
     try {
       final updated = await repository.updateProduct(id, updatedProduct);
       int index = products.indexWhere((p) => p.id == id);
       if (index != -1) {
-        products[index] = updated;
+        products[index] = updated.copyWith(id: id);
+        filterProducts(searchQuery.value);
         update();
         return true;
       }
+      return false;
     } catch (e) {
-      print(' Error: Failed to update product: $e');
+      print('Error updating product: $e');
+      Get.snackbar("Error", "Failed to update product");
+      return false;
     }
-    return false;
   }
+
 
   Future<void> deleteProduct(int id) async {
     try {
@@ -78,6 +87,4 @@ class HomeController extends GetxController {
       Get.snackbar("Error", "Failed to delete product");
     }
   }
-
-
 }
