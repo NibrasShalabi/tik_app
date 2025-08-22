@@ -12,27 +12,31 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed(AppRoutes.home);
-    });
+    indecetot();
 
     return Scaffold(
       backgroundColor: AppColors.accent,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              'assets/animation/Animation_1740222879103.json',
-              width: screenWidth * 0.5,
-              height: screenHeight * 0.3,
-              fit: BoxFit.contain,
-            ),
-            Text("Welcome to TikApp!", style:AppTextStyles.Welcome),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Lottie.asset(
+            'assets/animation/Animation_1740222879103.json',
+            width: screenWidth * 0.5,
+            height: screenHeight * 0.3,
+            fit: BoxFit.contain,
+          ),
+          Text("Welcome to TikApp!",textAlign: TextAlign.center, style:AppTextStyles.Welcome)
+
+          ,
+        ],
       ),
     );
+  }
+
+  void indecetot() {
+     Future.delayed(const Duration(seconds: 3), () {
+      Get.offNamed(AppRoutes.home,);
+    });
   }
 }
